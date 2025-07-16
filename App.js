@@ -14,6 +14,7 @@ import BMIcalculator from "./screens/BMIcalculator";
 import BodyfatCalculator from "./screens/BodyfatCalculator";
 import CalorieCalculator from "./screens/CalorieCalculator";
 import MacroCalculator from "./screens/MacroCalculator";
+import CalorieInfo from "./screens/CalorieInfo";
 
 const Stack = createNativeStackNavigator();
 
@@ -65,6 +66,7 @@ export default function App() {
         <Stack.Screen name="BodyFat" component={BodyfatCalculator} />
         <Stack.Screen name="Calories" component={CalorieCalculator} />
         <Stack.Screen name="Macros" component={MacroCalculator} />
+        <Stack.Screen name="CalorieInfo" component={CalorieInfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

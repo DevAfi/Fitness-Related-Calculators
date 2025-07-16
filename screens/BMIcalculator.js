@@ -1,6 +1,7 @@
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useState } from "react";
 
 import {
   StyleSheet,
@@ -10,9 +11,17 @@ import {
   SafeAreaView,
   TextInput,
   Button,
+  ScrollView,
 } from "react-native";
 
+import BodyfatCalculator from "./BodyfatCalculator";
+import CalorieCalculator from "./CalorieCalculator";
+import MacroCalculator from "./MacroCalculator";
+
+const Tab = createBottomTabNavigator();
+
 const BMIcalculator = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>BMI Calculator</Text>
@@ -30,6 +39,46 @@ const BMIcalculator = () => {
         />
         <Button title="Calculate BMI" onPress={() => {}} />
       </View>
+
+      {/*  Navigation Bar */}
+
+      <View style={styles.navBarContainer}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+        >
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.navigate("BMI")}
+          >
+            <Text style={styles.navButtonText}>BMI</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.navigate("BodyFat")}
+          >
+            <Text style={styles.navButtonText}>Body Fat</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.navigate("Calories")}
+          >
+            <Text style={styles.navButtonText}>Calorie</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.navigate("Macros")}
+          >
+            <Text style={styles.navButtonText}>Macros</Text>
+          </TouchableOpacity>
+
+          {/* Add more buttons here if needed */}
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
@@ -46,6 +95,37 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 10,
     color: "#014421",
+    fontFamily: "Arial",
+  },
+
+  /* Navigation Bar */
+
+  navBarContainer: {
+    paddingVertical: 10,
+    //backgroundColor: "black",
+    height: 60,
+
+    position: "absolute",
+    bottom: 10,
+  },
+  scrollContent: {
+    paddingHorizontal: 10,
+    alignItems: "center",
+  },
+  navButton: {
+    backgroundColor: "#d0d8c3",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    marginHorizontal: 5,
+
+    borderWidth: 1,
+    borderColor: "#014421",
+  },
+  navButtonText: {
+    color: "#014421",
+    fontWeight: "bold",
+    fontSize: 16,
     fontFamily: "Arial",
   },
 });
