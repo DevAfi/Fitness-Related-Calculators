@@ -29,7 +29,7 @@ const CalorieCalculator = () => {
   const [age, setAge] = useState("25");
   const [gender, setGender] = useState("male");
   const [weight, setWeight] = useState("60");
-  const [height, setHeight] = useState("18");
+  const [height, setHeight] = useState("1.8");
   const [activityLevel, setActivityLevel] = useState("sedentary");
   const [calories, setCalories] = useState(null);
 
