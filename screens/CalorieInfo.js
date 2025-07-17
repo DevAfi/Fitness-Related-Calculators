@@ -9,12 +9,15 @@ import {
   Button,
   ScrollView,
 } from "react-native";
+import { useState } from "react";
 
 import GoalPicker from "../utils/GoalPicker";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
 const CalorieInfo = ({ route }) => {
   const { calories } = route.params;
   const [selectedGoal, setSelectedGoal] = React.useState("weight_loss");
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -31,6 +34,55 @@ const CalorieInfo = ({ route }) => {
         <GoalPicker selectedGoal={selectedGoal} onSelect={setSelectedGoal} />
       </View>
 
+      {selectedGoal == "weight_loss" ? (
+        <View style={styles.CardContainer}>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Mild Weight Loss</Text>
+            <Text style={styles.cardValue}>
+              {Math.round(calories * 0.89)} kcal/day
+            </Text>
+            <Text style={styles.cardSubtitle}>-11% (0.25kg/week)</Text>
+          </View>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Weight Loss</Text>
+            <Text style={styles.cardValue}>
+              {Math.round(calories * 0.79)} kcal/day
+            </Text>
+            <Text style={styles.cardSubtitle}>-21% (0.5kg/week)</Text>
+          </View>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Extreme Weight Loss</Text>
+            <Text style={styles.cardValue}>
+              {Math.round(calories * 0.57)} kcal/day
+            </Text>
+            <Text style={styles.cardSubtitle}>-43% (1kg/week)</Text>
+          </View>
+        </View>
+      ) : (
+        <View style={styles.CardContainer}>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Mild Weight Loss</Text>
+            <Text style={styles.cardValue}>
+              {Math.round(calories * 1.05)} kcal/day
+            </Text>
+            <Text style={styles.cardSubtitle}>+5% (0.25kg/week)</Text>
+          </View>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Weight Loss</Text>
+            <Text style={styles.cardValue}>
+              {Math.round(calories * 1.21)} kcal/day
+            </Text>
+            <Text style={styles.cardSubtitle}>+21% (0.5kg/week)</Text>
+          </View>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Extreme Weight Gain</Text>
+            <Text style={styles.cardValue}>
+              {Math.round(calories * 1.43)} kcal/day
+            </Text>
+            <Text style={styles.cardSubtitle}>+43% (1kg/week)</Text>
+          </View>
+        </View>
+      )}
       {/*<View style={styles.card}>
         <Text style={styles.cardTitle}>Weight Gain</Text>
         <Text style={styles.cardValue}>
@@ -49,6 +101,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#d0d8c3",
     width: "100%",
     alignItems: "center",
+  },
+  CardContainer: {
+    width: "80%",
+    gap: 15,
+    marginVertical: 50,
   },
   card: {
     backgroundColor: "#fff",
