@@ -4,7 +4,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 const GenderPicker = ({ selectedGender, onSelect }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Gender:</Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={[
@@ -47,12 +46,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     marginVertical: 10,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
-    color: "#014421",
-    fontWeight: "bold",
+    flexDirection: "row",
   },
   buttonContainer: {
     flexDirection: "row",
@@ -75,6 +69,7 @@ const styles = StyleSheet.create({
   genderText: {
     color: "#014421",
     fontWeight: "bold",
+    fontSize: 19,
   },
   selectedText: {
     color: "white",

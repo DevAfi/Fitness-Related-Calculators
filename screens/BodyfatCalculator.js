@@ -13,6 +13,8 @@ import {
   TextInput,
   Button,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 import CalorieCalculator from "./CalorieCalculator";
@@ -76,102 +78,105 @@ const BodyfatCalculator = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.topHeader}>
-        <TouchableOpacity
-          style={styles.infoButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Text>{"<"}</Text>
-        </TouchableOpacity>
-        <Text style={styles.titleText}>Calorie Calculator</Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topHeader}>
+          <TouchableOpacity
+            style={styles.infoButton}
+            onPress={() => navigation.goBack()}
+          >
+            <Text>{"<"}</Text>
+          </TouchableOpacity>
+          <Text style={styles.titleText}>Body Fat Calculator</Text>
 
-        <Tab.Screen
-          name="ResultBF"
-          component={ResultBF}
-          options={{ headerShown: false }}
-        />
-        <TouchableOpacity
-          style={styles.infoButton}
-          onPress={() => navigation.navigate("ResultBF", { bodyFat })}
-        >
-          <Text>i</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.QuestionContainer}>
-        <Text style={styles.QuestionCaption}>Age:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your Age"
-          keyboardType="numeric"
-          value={age}
-          onChangeText={setAge}
-        />
-        <GenderPicker selectedGender={gender} onSelect={setGender} />
-        <Text style={styles.QuestionCaption}>Weight (kg):</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your Weight (kg)"
-          keyboardType="numeric"
-          value={weight}
-          onChangeText={setWeight}
-        />
-        <Text style={styles.QuestionCaption}>Height (cm):</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your height (m)"
-          keyboardType="numeric"
-          value={height}
-          onChangeText={setHeight}
-        />
-        <Text style={styles.QuestionCaption}>Waist Circumference (cm):</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your waist circumference (cm)"
-          keyboardType="numeric"
-          value={waist}
-          onChangeText={setWaist}
-        />
-        <Text style={styles.QuestionCaption}>Neck Circumference (cm):</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your neck circumference (cm)"
-          keyboardType="numeric"
-          value={neck}
-          onChangeText={setNeck}
-        />
-
-        {gender == "female" ? (
-          <View style={{ width: "100%" }}>
-            <Text style={styles.QuestionCaption}>Hip Circumference (cm):</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your hip circumference (cm)"
-              keyboardType="numeric"
-              value={hip}
-              onChangeText={setHip}
-            />
-          </View>
-        ) : null}
-
-        <Button
-          title="Calculate Body Fat"
-          onPress={handleCalculate}
-          style={styles.buttonSub}
-        />
-      </View>
-
-      {bodyFat && (
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultTitle}>Body Fat Percentage</Text>
-          <Text style={styles.resultValue}>{bodyFat} %</Text>
+          <Tab.Screen
+            name="ResultBF"
+            component={ResultBF}
+            options={{ headerShown: false }}
+          />
+          <TouchableOpacity
+            style={styles.infoButton}
+            onPress={() => navigation.navigate("ResultBF", { bodyFat })}
+          >
+            <Text>i</Text>
+          </TouchableOpacity>
         </View>
-      )}
 
-      {/*  Navigation Bar */}
+        <View style={styles.QuestionContainer}>
+          <Text style={styles.QuestionCaption}>Age:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your Age"
+            keyboardType="numeric"
+            value={age}
+            onChangeText={setAge}
+          />
+          <GenderPicker selectedGender={gender} onSelect={setGender} />
+          <Text style={styles.QuestionCaption}>Weight (kg):</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your Weight (kg)"
+            keyboardType="numeric"
+            value={weight}
+            onChangeText={setWeight}
+          />
+          <Text style={styles.QuestionCaption}>Height (cm):</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your height (m)"
+            keyboardType="numeric"
+            value={height}
+            onChangeText={setHeight}
+          />
+          <Text style={styles.QuestionCaption}>Waist Circumference (cm):</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your waist circumference (cm)"
+            keyboardType="numeric"
+            value={waist}
+            onChangeText={setWaist}
+          />
+          <Text style={styles.QuestionCaption}>Neck Circumference (cm):</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your neck circumference (cm)"
+            keyboardType="numeric"
+            value={neck}
+            onChangeText={setNeck}
+          />
 
-      {/* <View style={styles.navBarContainer}>
+          {gender == "female" ? (
+            <View style={{ width: "100%" }}>
+              <Text style={styles.QuestionCaption}>
+                Hip Circumference (cm):
+              </Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your hip circumference (cm)"
+                keyboardType="numeric"
+                value={hip}
+                onChangeText={setHip}
+              />
+            </View>
+          ) : null}
+
+          <Button
+            title="Calculate Body Fat"
+            onPress={handleCalculate}
+            style={styles.buttonSub}
+          />
+        </View>
+
+        {bodyFat && (
+          <View style={styles.resultContainer}>
+            <Text style={styles.resultTitle}>Body Fat Percentage</Text>
+            <Text style={styles.resultValue}>{bodyFat} %</Text>
+          </View>
+        )}
+
+        {/*  Navigation Bar */}
+
+        {/* <View style={styles.navBarContainer}>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -206,7 +211,8 @@ const BodyfatCalculator = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>*/}
-    </SafeAreaView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

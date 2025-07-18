@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   StyleSheet,
   Text,
@@ -10,8 +9,17 @@ import {
   Button,
   ScrollView,
 } from "react-native";
+import { useState } from "react";
 
-const ResultBF = () => {
+import GoalPicker from "../utils/GoalPicker";
+import GenderPicker from "../utils/GenderPicker";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+
+const ResultBF = ({ route }) => {
+  const { calories } = route.params;
+  const [selectedGender, setGender] = React.useState("male");
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topHeader}>
@@ -21,16 +29,64 @@ const ResultBF = () => {
         >
           <Text>{"<"}</Text>
         </TouchableOpacity>
-        <Text style={styles.cardTitle}>Body Fat Information</Text>
+        <Text style={styles.cardTitle}>Calorie Information</Text>
       </View>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.QuestionContainer}>
+          <GenderPicker selectedGender={selectedGender} onSelect={setGender} />
+        </View>
 
-      {/*<View style={styles.card}>
-        <Text style={styles.cardTitle}>Weight Gain</Text>
-        <Text style={styles.cardValue}>
-          {Math.round(calories * 1.15)} kcal/day
-        </Text>
-        <Text style={styles.cardSubtitle}>+15% (0.5kg/week)</Text>
-      </View>*/}
+        {selectedGender == "male" ? (
+          <View style={styles.CardContainer}>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Essential</Text>
+              <Text style={styles.cardValue}>2 - 5%</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Athletes</Text>
+              <Text style={styles.cardValue}>6 - 13%</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Fitness</Text>
+              <Text style={styles.cardValue}>14 - 17%</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Acceptable</Text>
+              <Text style={styles.cardValue}>18 - 24%</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Obese</Text>
+              <Text style={styles.cardValue}>25% +</Text>
+            </View>
+          </View>
+        ) : (
+          <View style={styles.CardContainer}>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Essential</Text>
+              <Text style={styles.cardValue}>10 - 13%</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Athletes</Text>
+              <Text style={styles.cardValue}>14 - 20%</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Fitness</Text>
+              <Text style={styles.cardValue}>21 - 24%</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Acceptable</Text>
+              <Text style={styles.cardValue}>25 - 31%</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Obese</Text>
+              <Text style={styles.cardValue}>32% +</Text>
+            </View>
+          </View>
+        )}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -40,6 +96,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#d0d8c3",
+    width: "100%",
+  },
+  scrollContent: {
     width: "100%",
     alignItems: "center",
   },
