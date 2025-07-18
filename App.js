@@ -16,6 +16,7 @@ import CalorieCalculator from "./screens/CalorieCalculator";
 import MacroCalculator from "./screens/MacroCalculator";
 import CalorieInfo from "./screens/CalorieInfo";
 import ResultBF from "./screens/ResultBF";
+import ResultMacro from "./screens/ResultMacro";
 
 const Stack = createNativeStackNavigator();
 
@@ -69,6 +70,7 @@ export default function App() {
         <Stack.Screen name="Macros" component={MacroCalculator} />
         <Stack.Screen name="CalorieInfo" component={CalorieInfo} />
         <Stack.Screen name="ResultBF" component={ResultBF} />
+        <Stack.Screen name="ResultMacro" component={ResultMacro} />
       </Stack.Navigator>
     </NavigationContainer>
   );

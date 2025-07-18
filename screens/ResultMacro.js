@@ -13,11 +13,14 @@ import { useState } from "react";
 
 import GoalPicker from "../utils/GoalPicker";
 import GenderPicker from "../utils/GenderPicker";
+import MacroCalRate from "../utils/MacroCalRate";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
 const ResultMacro = ({ route }) => {
   const { calories } = route.params;
   const [selectedGender, setGender] = React.useState("male");
+  const [selectedGoal, setSelectedGoal] = React.useState("weight_loss");
+  const [selectedRate, setSelectedRate] = React.useState("mild");
   const navigation = useNavigation();
 
   return (
@@ -35,57 +38,17 @@ const ResultMacro = ({ route }) => {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.QuestionContainer}>
-          <GenderPicker selectedGender={selectedGender} onSelect={setGender} />
-        </View>
-
-        {selectedGender == "male" ? (
-          <View style={styles.CardContainer}>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Essential</Text>
-              <Text style={styles.cardValue}>2 - 5%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Athletes</Text>
-              <Text style={styles.cardValue}>6 - 13%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Fitness</Text>
-              <Text style={styles.cardValue}>14 - 17%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Acceptable</Text>
-              <Text style={styles.cardValue}>18 - 24%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Obese</Text>
-              <Text style={styles.cardValue}>25% +</Text>
-            </View>
-          </View>
-        ) : (
-          <View style={styles.CardContainer}>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Essential</Text>
-              <Text style={styles.cardValue}>10 - 13%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Athletes</Text>
-              <Text style={styles.cardValue}>14 - 20%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Fitness</Text>
-              <Text style={styles.cardValue}>21 - 24%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Acceptable</Text>
-              <Text style={styles.cardValue}>25 - 31%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Obese</Text>
-              <Text style={styles.cardValue}>32% +</Text>
-            </View>
-          </View>
-        )}
+        <MacroCalRate
+          selectedGoal={selectedGoal}
+          selectedRate={selectedRate}
+          onSelect={(value) => {
+            if (["weight_loss", "muscle_gain"].includes(value)) {
+              setSelectedGoal(value);
+            } else {
+              setSelectedRate(value);
+            }
+          }}
+        />
       </ScrollView>
     </SafeAreaView>
   );
