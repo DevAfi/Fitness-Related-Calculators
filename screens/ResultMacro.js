@@ -15,6 +15,11 @@ import GoalPicker from "../utils/GoalPicker";
 import GenderPicker from "../utils/GenderPicker";
 import MacroCalRate from "../utils/MacroCalRate";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import {
+  calculateCarbs,
+  calculateFats,
+  calculateProtein,
+} from "../utils/Calculations";
 
 const ResultMacro = ({ route }) => {
   const { calories } = route.params;
@@ -49,6 +54,44 @@ const ResultMacro = ({ route }) => {
             }
           }}
         />
+
+        {selectedGoal == "weight_loss" ? (
+          <View>
+            {selectedRate == "mild" ? (
+              <View style={styles.CardContainer}>
+                <View style={styles.card}>
+                  <Text style={styles.cardTitle}>Carbohydrates:</Text>
+                  <Text style={styles.cardValue}>
+                    {calculateCarbs(calories)} grams/day
+                  </Text>
+                  <Text style={styles.cardSubtitle}>-11% (0.25kg/week)</Text>
+                </View>
+                <View style={styles.card}>
+                  <Text style={styles.cardTitle}>Protein:</Text>
+                  <Text style={styles.cardValue}>
+                    {calculateProtein(calories)} grams/day
+                  </Text>
+                  <Text style={styles.cardSubtitle}>-21% (0.5kg/week)</Text>
+                </View>
+                <View style={styles.card}>
+                  <Text style={styles.cardTitle}>Fat</Text>
+                  <Text style={styles.cardValue}>
+                    {calculateFats(calories)} grams/day
+                  </Text>
+                  <Text style={styles.cardSubtitle}>-43% (1kg/week)</Text>
+                </View>
+              </View>
+            ) : selectedRate == "normal" ? (
+              <View>
+                <Text>normal</Text>
+              </View>
+            ) : (
+              <View>
+                <Text>Extreme</Text>
+              </View>
+            )}
+          </View>
+        ) : null}
       </ScrollView>
     </SafeAreaView>
   );
@@ -77,6 +120,16 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderWidth: 1,
     borderColor: "#014421",
+  },
+  InfoContainer: {
+    width: "80%",
+    height: "100%",
+    alignItems: "center",
+    gap: 5,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#014421",
+    backgroundColor: "#f0f0f0",
   },
   cardTitle: {
     fontSize: 18,

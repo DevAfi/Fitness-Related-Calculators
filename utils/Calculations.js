@@ -32,8 +32,6 @@ export const calculateCaloricNeeds = (
   return Math.round(bmr * activityMultipliers[activityLevel]);
 };
 
-const int2US = (original, type) => {};
-
 export const calculateBodyFat = (
   age,
   gender,
@@ -61,4 +59,29 @@ export const calculateBodyFat = (
   }
 
   return BFP.toFixed(1);
+};
+
+export const calculateCarbs = (cals) => {
+  let carbs;
+
+  carbs = cals * 0.5;
+  carbs = carbs / 4;
+  return carbs.toFixed(1);
+};
+
+export const calculateProtein = (cals) => {
+  let prot;
+
+  prot = cals * 0.3;
+  prot = prot / 4;
+  return prot.toFixed(1);
+};
+
+export const calculateFats = (cals) => {
+  let fats;
+
+  fats = cals * 0.2;
+  fats = fats / 9;
+
+  return fats.toFixed(1);
 };

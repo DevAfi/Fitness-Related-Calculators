@@ -91,7 +91,7 @@ const MacroCalculator = () => {
         />
         <TouchableOpacity
           style={styles.infoButton}
-          onPress={() => navigation.navigate("CalorieInfo", { calories })}
+          onPress={() => navigation.navigate("ResultMacro", { calories })}
         >
           <Text>i</Text>
         </TouchableOpacity>
@@ -128,12 +128,11 @@ const MacroCalculator = () => {
           onValueChange={setActivityLevel}
         />
 
-        <TouchableOpacity
-          style={styles.ButtonSub}
-          onPress={() => navigation.navigate("ResultMacro", { calories })}
-        >
-          <Text>Calculate Macros</Text>
-        </TouchableOpacity>
+        <Button
+          title="Calculate Calories"
+          onPress={handleCalculate}
+          style={styles.buttonSub}
+        />
       </View>
 
       {calories && (
