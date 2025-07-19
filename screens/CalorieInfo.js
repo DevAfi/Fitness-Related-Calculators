@@ -93,13 +93,6 @@ const CalorieInfo = ({ route }) => {
               </View>
             </View>
           )}
-          {/*<View style={styles.card}>
-        <Text style={styles.cardTitle}>Weight Gain</Text>
-        <Text style={styles.cardValue}>
-          {Math.round(calories * 1.15)} kcal/day
-        </Text>
-        <Text style={styles.cardSubtitle}>+15% (0.5kg/week)</Text>
-      </View>*/}
           <View style={styles.disclaimerContainer}>
             <Text style={styles.finePrint}>
               Disclaimer: The macronutrient and calorie estimates provided here
