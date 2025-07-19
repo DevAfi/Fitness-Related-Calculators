@@ -95,21 +95,6 @@ const BMIcalculator = () => {
               onChangeText={setHeight}
             />
 
-            {gender == "female" ? (
-              <View style={{ width: "100%" }}>
-                <Text style={styles.QuestionCaption}>
-                  Hip Circumference (cm):
-                </Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Enter your hip circumference (cm)"
-                  keyboardType="numeric"
-                  value={hip}
-                  onChangeText={setHip}
-                />
-              </View>
-            ) : null}
-
             <Button
               title="Calculate Body Mass Index"
               onPress={handleCalculate}
