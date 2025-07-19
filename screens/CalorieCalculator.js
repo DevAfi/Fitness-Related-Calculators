@@ -31,7 +31,6 @@ const CalorieCalculator = () => {
   const [weight, setWeight] = useState("60");
   const [height, setHeight] = useState("1.8");
   const [activityLevel, setActivityLevel] = useState("sedentary");
-  const [calories, setCalories] = useState(null);
 
   const multipliers = {
     sedentary: 1.2,

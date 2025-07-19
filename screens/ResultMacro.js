@@ -16,6 +16,7 @@ import GenderPicker from "../utils/GenderPicker";
 import MacroCalRate from "../utils/MacroCalRate";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import {
+  calculateCaloricNeeds,
   calculateCarbs,
   calculateFats,
   calculateProtein,
@@ -28,6 +29,21 @@ const ResultMacro = ({ route }) => {
   const [selectedRate, setSelectedRate] = React.useState("mild");
   const navigation = useNavigation();
 
+  const getAdjustedCalories = () => {
+    let factor = 1; // default
+    if (selectedGoal === "weight_loss") {
+      if (selectedRate === "mild") factor = 0.89;
+      else if (selectedRate === "normal") factor = 0.79;
+      else if (selectedRate === "extreme") factor = 0.57;
+    } else if (selectedGoal === "muscle_gain") {
+      if (selectedRate === "mild") factor = 1.05;
+      else if (selectedRate === "normal") factor = 1.21;
+      else if (selectedRate === "extreme") factor = 1.43;
+    }
+    return Math.round(calories * factor);
+  };
+
+  const adjustedCalories = getAdjustedCalories();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topHeader}>
@@ -55,43 +71,32 @@ const ResultMacro = ({ route }) => {
           }}
         />
 
-        {selectedGoal == "weight_loss" ? (
-          <View>
-            {selectedRate == "mild" ? (
-              <View style={styles.CardContainer}>
-                <View style={styles.card}>
-                  <Text style={styles.cardTitle}>Carbohydrates:</Text>
-                  <Text style={styles.cardValue}>
-                    {calculateCarbs(calories)} grams/day
-                  </Text>
-                  <Text style={styles.cardSubtitle}>-11% (0.25kg/week)</Text>
-                </View>
-                <View style={styles.card}>
-                  <Text style={styles.cardTitle}>Protein:</Text>
-                  <Text style={styles.cardValue}>
-                    {calculateProtein(calories)} grams/day
-                  </Text>
-                  <Text style={styles.cardSubtitle}>-21% (0.5kg/week)</Text>
-                </View>
-                <View style={styles.card}>
-                  <Text style={styles.cardTitle}>Fat</Text>
-                  <Text style={styles.cardValue}>
-                    {calculateFats(calories)} grams/day
-                  </Text>
-                  <Text style={styles.cardSubtitle}>-43% (1kg/week)</Text>
-                </View>
-              </View>
-            ) : selectedRate == "normal" ? (
-              <View>
-                <Text>normal</Text>
-              </View>
-            ) : (
-              <View>
-                <Text>Extreme</Text>
-              </View>
-            )}
+        {selectedGoal == "weight_loss" && (
+          <View style={styles.CardContainer}>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Calories:</Text>
+              <Text style={styles.cardValue}>{adjustedCalories} cals/day</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Carbohydrates:</Text>
+              <Text style={styles.cardValue}>
+                {calculateCarbs(adjustedCalories)} grams/day
+              </Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Protein:</Text>
+              <Text style={styles.cardValue}>
+                {calculateProtein(adjustedCalories)} grams/day
+              </Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Fat:</Text>
+              <Text style={styles.cardValue}>
+                {calculateFats(adjustedCalories)} grams/day
+              </Text>
+            </View>
           </View>
-        ) : null}
+        )}
       </ScrollView>
     </SafeAreaView>
   );
