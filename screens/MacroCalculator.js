@@ -74,7 +74,7 @@ const MacroCalculator = () => {
     setCalories(calculatedCalories);
 
     navigation.navigate("ResultMacro", {
-      calories,
+      calories: calculatedCalories,
       weight: parseFloat(weight),
     });
   };
@@ -140,7 +140,7 @@ const MacroCalculator = () => {
         />
 
         <Button
-          title="Calculate Calories"
+          title="Calculate Macros"
           onPress={handleCalculate}
           style={styles.buttonSub}
         />

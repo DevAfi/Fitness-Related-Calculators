@@ -66,9 +66,9 @@ export const calculateMacros = (calories, weightKg) => {
   const weight = parseFloat(weightKg) || 0;
 
   const weightInLbs = weight * 2.20462;
-  const protein = weightInLbs * 0.9;
+  const protein = (cals * 0.31) / 4;
   const carbs = (cals * 0.5) / 4;
-  const fats = (cals - (protein * 4 + carbs * 4)) / 9;
+  const fats = (cals * 0.19) / 9;
 
   return {
     protein: Math.max(0, protein),
