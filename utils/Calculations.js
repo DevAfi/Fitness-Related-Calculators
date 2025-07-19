@@ -2,7 +2,8 @@ import { cmToFeet, cmToInches, kgToLbs } from "./convertUnits";
 
 export const calculateBMI = (weight, height) => {
   if (height > 0) {
-    return weight / (height * height);
+    height = height / 100;
+    return (weight / (height * height)).toFixed(1);
   }
   return 0;
 };
