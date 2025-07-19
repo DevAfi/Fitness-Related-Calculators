@@ -16,8 +16,7 @@ Below I will expand on how each one works
 
 This calculator takes the user's age, gender, height and weight to calculate their Basal Metabolic Rate (BMR), then gives the user options to either gain or lose weight at certain rates by increasing or decreasing their caloric intake respectively
 
-![CalorieCalculatorScreenshot](./Pictures/CalorieCalc.png)
-As shown above it allows the user to enter their:
+In total it allows the user to enter their:
 
 <ul>
   <li>Age</li>
