@@ -15,22 +15,17 @@ import GoalPicker from "../utils/GoalPicker";
 import GenderPicker from "../utils/GenderPicker";
 import MacroCalRate from "../utils/MacroCalRate";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import {
-  calculateCaloricNeeds,
-  calculateCarbs,
-  calculateFats,
-  calculateProtein,
-} from "../utils/Calculations";
+import { calculateCaloricNeeds, calculateMacros } from "../utils/Calculations";
 
 const ResultMacro = ({ route }) => {
-  const { calories } = route.params;
+  const { calories, weight } = route.params;
   const [selectedGender, setGender] = React.useState("male");
   const [selectedGoal, setSelectedGoal] = React.useState("weight_loss");
   const [selectedRate, setSelectedRate] = React.useState("mild");
   const navigation = useNavigation();
 
   const getAdjustedCalories = () => {
-    let factor = 1; // default
+    let factor = 1;
     if (selectedGoal === "weight_loss") {
       if (selectedRate === "mild") factor = 0.89;
       else if (selectedRate === "normal") factor = 0.79;
@@ -44,6 +39,16 @@ const ResultMacro = ({ route }) => {
   };
 
   const adjustedCalories = getAdjustedCalories();
+
+  console.log("Before calculateMacros:", {
+    adjustedCalories,
+    weight,
+    typeofAdjustedCalories: typeof adjustedCalories,
+    typeofWeight: typeof weight,
+  });
+
+  const { protein, carbs, fats } = calculateMacros(adjustedCalories, weight);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topHeader}>
@@ -71,29 +76,50 @@ const ResultMacro = ({ route }) => {
           }}
         />
 
-        {selectedGoal == "weight_loss" && (
+        {selectedGoal == "weight_loss" ? (
           <View style={styles.CardContainer}>
             <View style={styles.card}>
               <Text style={styles.cardTitle}>Calories:</Text>
-              <Text style={styles.cardValue}>{adjustedCalories} cals/day</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Carbohydrates:</Text>
               <Text style={styles.cardValue}>
-                {calculateCarbs(adjustedCalories)} grams/day
+                {adjustedCalories.toFixed(1)} grams/day
               </Text>
             </View>
             <View style={styles.card}>
               <Text style={styles.cardTitle}>Protein:</Text>
               <Text style={styles.cardValue}>
-                {calculateProtein(adjustedCalories)} grams/day
+                {protein.toFixed(1)} grams/day
               </Text>
             </View>
             <View style={styles.card}>
+              <Text style={styles.cardTitle}>Carbohydrates:</Text>
+              <Text style={styles.cardValue}>{carbs.toFixed(1)} grams/day</Text>
+            </View>
+            <View style={styles.card}>
               <Text style={styles.cardTitle}>Fat:</Text>
+              <Text style={styles.cardValue}>{fats.toFixed(1)} grams/day</Text>
+            </View>
+          </View>
+        ) : (
+          <View style={styles.CardContainer}>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Calories:</Text>
               <Text style={styles.cardValue}>
-                {calculateFats(adjustedCalories)} grams/day
+                {adjustedCalories.toFixed(1)} grams/day
               </Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Protein:</Text>
+              <Text style={styles.cardValue}>
+                {protein.toFixed(1)} grams/day
+              </Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Carbohydrates:</Text>
+              <Text style={styles.cardValue}>{carbs.toFixed(1)} grams/day</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Fat:</Text>
+              <Text style={styles.cardValue}>{fats.toFixed(1)} grams/day</Text>
             </View>
           </View>
         )}

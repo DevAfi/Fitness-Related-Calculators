@@ -1,4 +1,4 @@
-import { cmToFeet, cmToInches } from "./convertUnits";
+import { cmToFeet, cmToInches, kgToLbs } from "./convertUnits";
 
 export const calculateBMI = (weight, height) => {
   if (height > 0) {
@@ -61,27 +61,18 @@ export const calculateBodyFat = (
   return BFP.toFixed(1);
 };
 
-export const calculateCarbs = (cals) => {
-  let carbs;
+export const calculateMacros = (calories, weightKg) => {
+  const cals = parseFloat(calories) || 0;
+  const weight = parseFloat(weightKg) || 0;
 
-  carbs = cals * 0.5;
-  carbs = carbs / 4;
-  return carbs.toFixed(1);
-};
+  const weightInLbs = weight * 2.20462;
+  const protein = weightInLbs * 0.9;
+  const carbs = (cals * 0.5) / 4;
+  const fats = (cals - (protein * 4 + carbs * 4)) / 9;
 
-export const calculateProtein = (cals) => {
-  let prot;
-
-  prot = cals * 0.3;
-  prot = prot / 4;
-  return prot.toFixed(1);
-};
-
-export const calculateFats = (cals) => {
-  let fats;
-
-  fats = cals * 0.2;
-  fats = fats / 9;
-
-  return fats.toFixed(1);
+  return {
+    protein: Math.max(0, protein),
+    carbs: Math.max(0, carbs),
+    fats: Math.max(0, fats),
+  };
 };

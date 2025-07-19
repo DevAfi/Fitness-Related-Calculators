@@ -33,6 +33,7 @@ const MacroCalculator = () => {
   const [height, setHeight] = useState("1.8");
   const [activityLevel, setActivityLevel] = useState("sedentary");
   const [calories, setCalories] = useState(null);
+  const [calculatedWeight, setCalculatedWeight] = useState(null);
 
   const multipliers = {
     sedentary: 1.2,
@@ -71,6 +72,11 @@ const MacroCalculator = () => {
       activityLevel
     );
     setCalories(calculatedCalories);
+
+    navigation.navigate("ResultMacro", {
+      calories,
+      weight: parseFloat(weight),
+    });
   };
 
   return (
@@ -91,7 +97,12 @@ const MacroCalculator = () => {
         />
         <TouchableOpacity
           style={styles.infoButton}
-          onPress={() => navigation.navigate("ResultMacro", { calories })}
+          onPress={() =>
+            navigation.navigate("ResultMacro", {
+              calories,
+              weight: calculatedWeight,
+            })
+          }
         >
           <Text>i</Text>
         </TouchableOpacity>
