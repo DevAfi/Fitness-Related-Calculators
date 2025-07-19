@@ -212,6 +212,7 @@ const styles = StyleSheet.create({
   },
   disclaimerContainer: {
     width: "90%",
+    paddingVertical: 10,
   },
   finePrint: {
     color: "grey",

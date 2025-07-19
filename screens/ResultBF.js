@@ -86,6 +86,16 @@ const ResultBF = ({ route }) => {
             </View>
           </View>
         )}
+        <View style={styles.disclaimerContainer}>
+          <Text style={styles.finePrint}>
+            Disclaimer: The macronutrient and calorie estimates provided here
+            are for general informational purposes only and do not constitute
+            medical advice. Individual needs may vary. Always consult with a
+            qualified healthcare professional before making changes to your
+            diet, nutrition, or lifestyle. We do not recommend using these
+            calculators as the sole basis for dietary decisions{" "}
+          </Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -152,6 +162,14 @@ const styles = StyleSheet.create({
     borderColor: "#014421",
     position: "absolute",
     left: 10,
+  },
+  disclaimerContainer: {
+    width: "90%",
+    paddingVertical: 10,
+  },
+  finePrint: {
+    color: "grey",
+    fontSize: "10",
   },
 });
 
