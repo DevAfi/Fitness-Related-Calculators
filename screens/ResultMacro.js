@@ -8,6 +8,8 @@ import {
   TextInput,
   Button,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useState } from "react";
 
@@ -50,91 +52,101 @@ const ResultMacro = ({ route }) => {
   const { protein, carbs, fats } = calculateMacros(adjustedCalories, weight);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.topHeader}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.infoButton}
-        >
-          <Text>{"<"}</Text>
-        </TouchableOpacity>
-        <Text style={styles.cardTitle}>Macro Information</Text>
-      </View>
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        <MacroCalRate
-          selectedGoal={selectedGoal}
-          selectedRate={selectedRate}
-          onSelect={(value) => {
-            if (["weight_loss", "muscle_gain"].includes(value)) {
-              setSelectedGoal(value);
-            } else {
-              setSelectedRate(value);
-            }
-          }}
-        />
-
-        {selectedGoal == "weight_loss" ? (
-          <View style={styles.CardContainer}>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Calories:</Text>
-              <Text style={styles.cardValue}>
-                {adjustedCalories.toFixed(1)} grams/day
-              </Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Protein:</Text>
-              <Text style={styles.cardValue}>
-                {protein.toFixed(1)} grams/day
-              </Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Carbohydrates:</Text>
-              <Text style={styles.cardValue}>{carbs.toFixed(1)} grams/day</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Fat:</Text>
-              <Text style={styles.cardValue}>{fats.toFixed(1)} grams/day</Text>
-            </View>
-          </View>
-        ) : (
-          <View style={styles.CardContainer}>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Calories:</Text>
-              <Text style={styles.cardValue}>
-                {adjustedCalories.toFixed(1)} grams/day
-              </Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Protein:</Text>
-              <Text style={styles.cardValue}>
-                {protein.toFixed(1)} grams/day
-              </Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Carbohydrates:</Text>
-              <Text style={styles.cardValue}>{carbs.toFixed(1)} grams/day</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Fat:</Text>
-              <Text style={styles.cardValue}>{fats.toFixed(1)} grams/day</Text>
-            </View>
-          </View>
-        )}
-        <View style={styles.disclaimerContainer}>
-          <Text style={styles.finePrint}>
-            Disclaimer: The macronutrient and calorie estimates provided here
-            are for general informational purposes only and do not constitute
-            medical advice. Individual needs may vary. Always consult with a
-            qualified healthcare professional before making changes to your
-            diet, nutrition, or lifestyle. We do not recommend using these
-            calculators as the sole basis for dietary decisions{" "}
-          </Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topHeader}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.infoButton}
+          >
+            <Text>{"<"}</Text>
+          </TouchableOpacity>
+          <Text style={styles.cardTitle}>Macro Information</Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <MacroCalRate
+            selectedGoal={selectedGoal}
+            selectedRate={selectedRate}
+            onSelect={(value) => {
+              if (["weight_loss", "muscle_gain"].includes(value)) {
+                setSelectedGoal(value);
+              } else {
+                setSelectedRate(value);
+              }
+            }}
+          />
+
+          {selectedGoal == "weight_loss" ? (
+            <View style={styles.CardContainer}>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Calories:</Text>
+                <Text style={styles.cardValue}>
+                  {adjustedCalories.toFixed(1)} grams/day
+                </Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Protein:</Text>
+                <Text style={styles.cardValue}>
+                  {protein.toFixed(1)} grams/day
+                </Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Carbohydrates:</Text>
+                <Text style={styles.cardValue}>
+                  {carbs.toFixed(1)} grams/day
+                </Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Fat:</Text>
+                <Text style={styles.cardValue}>
+                  {fats.toFixed(1)} grams/day
+                </Text>
+              </View>
+            </View>
+          ) : (
+            <View style={styles.CardContainer}>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Calories:</Text>
+                <Text style={styles.cardValue}>
+                  {adjustedCalories.toFixed(1)} grams/day
+                </Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Protein:</Text>
+                <Text style={styles.cardValue}>
+                  {protein.toFixed(1)} grams/day
+                </Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Carbohydrates:</Text>
+                <Text style={styles.cardValue}>
+                  {carbs.toFixed(1)} grams/day
+                </Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Fat:</Text>
+                <Text style={styles.cardValue}>
+                  {fats.toFixed(1)} grams/day
+                </Text>
+              </View>
+            </View>
+          )}
+          <View style={styles.disclaimerContainer}>
+            <Text style={styles.finePrint}>
+              Disclaimer: The macronutrient and calorie estimates provided here
+              are for general informational purposes only and do not constitute
+              medical advice. Individual needs may vary. Always consult with a
+              qualified healthcare professional before making changes to your
+              diet, nutrition, or lifestyle. We do not recommend using these
+              calculators as the sole basis for dietary decisions{" "}
+            </Text>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

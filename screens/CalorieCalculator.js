@@ -14,6 +14,8 @@ import {
   TextInput,
   Button,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 import BodyfatCalculator from "./BodyfatCalculator";
@@ -72,95 +74,99 @@ const CalorieCalculator = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.topHeader}>
-        <TouchableOpacity
-          style={styles.infoButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Text>{"<"}</Text>
-        </TouchableOpacity>
-        <Text style={styles.titleText}>Calorie Calculator</Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topHeader}>
+          <TouchableOpacity
+            style={styles.infoButton}
+            onPress={() => navigation.goBack()}
+          >
+            <Text>{"<"}</Text>
+          </TouchableOpacity>
+          <Text style={styles.titleText}>Calorie Calculator</Text>
 
-        <Tab.Screen
-          name="CalorieInfo"
-          component={CalorieInfo}
-          options={{ headerShown: false }}
-        />
-        <TouchableOpacity
-          style={styles.infoButton}
-          onPress={() => navigation.navigate("CalorieInfo", { calories })}
-        >
-          <Text>i</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.QuestionContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your Age"
-          keyboardType="numeric"
-          value={age}
-          onChangeText={setAge}
-        />
-
-        <GenderPicker selectedGender={gender} onSelect={setGender} />
-
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your Weight (kg)"
-          keyboardType="numeric"
-          value={weight}
-          onChangeText={setWeight}
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your height (m)"
-          keyboardType="numeric"
-          value={height}
-          onChangeText={setHeight}
-        />
-        <ActivityLevelPicker
-          selectedValue={activityLevel}
-          onValueChange={setActivityLevel}
-        />
-
-        <Button
-          title="Calculate Calories"
-          onPress={handleCalculate}
-          style={styles.buttonSub}
-        />
-      </View>
-
-      {calories && (
-        <View style={styles.resultContainer}>
-          <Text style={styles.resultTitle}>MAINTENANCE CALORIES</Text>
-          <Text style={styles.resultValue}>{calories} kcal/day</Text>
-
-          <View style={styles.calorieInfoContainer}>
-            <View style={styles.calorieBox}>
-              <Text style={styles.calorieLabel}>Weight Loss</Text>
-              <Text style={styles.calorieValue}>
-                {Math.round(calories * 0.85)} kcal
-              </Text>
-              <Text style={styles.calorieSubtext}>-15%</Text>
-            </View>
-
-            <View style={styles.calorieBox}>
-              <Text style={styles.calorieLabel}>Weight Gain</Text>
-              <Text style={styles.calorieValue}>
-                {Math.round(calories * 1.15)} kcal
-              </Text>
-              <Text style={styles.calorieSubtext}>+15%</Text>
-            </View>
-          </View>
+          <Tab.Screen
+            name="CalorieInfo"
+            component={CalorieInfo}
+            options={{ headerShown: false }}
+          />
+          <TouchableOpacity
+            style={styles.infoButton}
+            onPress={() => navigation.navigate("CalorieInfo", { calories })}
+          >
+            <Text>i</Text>
+          </TouchableOpacity>
         </View>
-      )}
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.QuestionContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your Age"
+              keyboardType="numeric"
+              value={age}
+              onChangeText={setAge}
+            />
 
-      {/*  Navigation Bar */}
+            <GenderPicker selectedGender={gender} onSelect={setGender} />
 
-      {/* <View style={styles.navBarContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your Weight (kg)"
+              keyboardType="numeric"
+              value={weight}
+              onChangeText={setWeight}
+            />
+
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your height (m)"
+              keyboardType="numeric"
+              value={height}
+              onChangeText={setHeight}
+            />
+            <ActivityLevelPicker
+              selectedValue={activityLevel}
+              onValueChange={setActivityLevel}
+            />
+
+            <Button
+              title="Calculate Calories"
+              onPress={handleCalculate}
+              style={styles.buttonSub}
+            />
+          </View>
+
+          {calories && (
+            <View style={styles.resultContainer}>
+              <Text style={styles.resultTitle}>MAINTENANCE CALORIES</Text>
+              <Text style={styles.resultValue}>{calories} kcal/day</Text>
+
+              <View style={styles.calorieInfoContainer}>
+                <View style={styles.calorieBox}>
+                  <Text style={styles.calorieLabel}>Weight Loss</Text>
+                  <Text style={styles.calorieValue}>
+                    {Math.round(calories * 0.85)} kcal
+                  </Text>
+                  <Text style={styles.calorieSubtext}>-15%</Text>
+                </View>
+
+                <View style={styles.calorieBox}>
+                  <Text style={styles.calorieLabel}>Weight Gain</Text>
+                  <Text style={styles.calorieValue}>
+                    {Math.round(calories * 1.15)} kcal
+                  </Text>
+                  <Text style={styles.calorieSubtext}>+15%</Text>
+                </View>
+              </View>
+            </View>
+          )}
+
+          {/*  Navigation Bar */}
+
+          {/* <View style={styles.navBarContainer}>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -195,17 +201,19 @@ const CalorieCalculator = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>*/}
-      <View style={styles.disclaimerContainer}>
-        <Text style={styles.finePrint}>
-          Disclaimer: The macronutrient and calorie estimates provided here are
-          for general informational purposes only and do not constitute medical
-          advice. Individual needs may vary. Always consult with a qualified
-          healthcare professional before making changes to your diet, nutrition,
-          or lifestyle. We do not recommend using these calculators as the sole
-          basis for dietary decisions{" "}
-        </Text>
-      </View>
-    </SafeAreaView>
+          <View style={styles.disclaimerContainer}>
+            <Text style={styles.finePrint}>
+              Disclaimer: The macronutrient and calorie estimates provided here
+              are for general informational purposes only and do not constitute
+              medical advice. Individual needs may vary. Always consult with a
+              qualified healthcare professional before making changes to your
+              diet, nutrition, or lifestyle. We do not recommend using these
+              calculators as the sole basis for dietary decisions{" "}
+            </Text>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -216,6 +224,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     width: "100%",
+  },
+
+  scrollContent: {
+    width: "100%",
+    alignItems: "center",
   },
   topHeader: {
     flexDirection: "row",

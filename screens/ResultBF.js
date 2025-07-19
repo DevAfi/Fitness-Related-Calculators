@@ -8,6 +8,8 @@ import {
   TextInput,
   Button,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useState } from "react";
 
@@ -21,83 +23,88 @@ const ResultBF = ({ route }) => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.topHeader}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.infoButton}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topHeader}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.infoButton}
+          >
+            <Text>{"<"}</Text>
+          </TouchableOpacity>
+          <Text style={styles.cardTitle}>Calorie Information</Text>
+        </View>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
         >
-          <Text>{"<"}</Text>
-        </TouchableOpacity>
-        <Text style={styles.cardTitle}>Calorie Information</Text>
-      </View>
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.QuestionContainer}>
-          <GenderPicker selectedGender={selectedGender} onSelect={setGender} />
-        </View>
+          <View style={styles.QuestionContainer}>
+            <GenderPicker
+              selectedGender={selectedGender}
+              onSelect={setGender}
+            />
+          </View>
 
-        {selectedGender == "male" ? (
-          <View style={styles.CardContainer}>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Essential</Text>
-              <Text style={styles.cardValue}>2 - 5%</Text>
+          {selectedGender == "male" ? (
+            <View style={styles.CardContainer}>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Essential</Text>
+                <Text style={styles.cardValue}>2 - 5%</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Athletes</Text>
+                <Text style={styles.cardValue}>6 - 13%</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Fitness</Text>
+                <Text style={styles.cardValue}>14 - 17%</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Acceptable</Text>
+                <Text style={styles.cardValue}>18 - 24%</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Obese</Text>
+                <Text style={styles.cardValue}>25% +</Text>
+              </View>
             </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Athletes</Text>
-              <Text style={styles.cardValue}>6 - 13%</Text>
+          ) : (
+            <View style={styles.CardContainer}>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Essential</Text>
+                <Text style={styles.cardValue}>10 - 13%</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Athletes</Text>
+                <Text style={styles.cardValue}>14 - 20%</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Fitness</Text>
+                <Text style={styles.cardValue}>21 - 24%</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Acceptable</Text>
+                <Text style={styles.cardValue}>25 - 31%</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Obese</Text>
+                <Text style={styles.cardValue}>32% +</Text>
+              </View>
             </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Fitness</Text>
-              <Text style={styles.cardValue}>14 - 17%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Acceptable</Text>
-              <Text style={styles.cardValue}>18 - 24%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Obese</Text>
-              <Text style={styles.cardValue}>25% +</Text>
-            </View>
+          )}
+          <View style={styles.disclaimerContainer}>
+            <Text style={styles.finePrint}>
+              Disclaimer: The macronutrient and calorie estimates provided here
+              are for general informational purposes only and do not constitute
+              medical advice. Individual needs may vary. Always consult with a
+              qualified healthcare professional before making changes to your
+              diet, nutrition, or lifestyle. We do not recommend using these
+              calculators as the sole basis for dietary decisions{" "}
+            </Text>
           </View>
-        ) : (
-          <View style={styles.CardContainer}>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Essential</Text>
-              <Text style={styles.cardValue}>10 - 13%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Athletes</Text>
-              <Text style={styles.cardValue}>14 - 20%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Fitness</Text>
-              <Text style={styles.cardValue}>21 - 24%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Acceptable</Text>
-              <Text style={styles.cardValue}>25 - 31%</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>Obese</Text>
-              <Text style={styles.cardValue}>32% +</Text>
-            </View>
-          </View>
-        )}
-        <View style={styles.disclaimerContainer}>
-          <Text style={styles.finePrint}>
-            Disclaimer: The macronutrient and calorie estimates provided here
-            are for general informational purposes only and do not constitute
-            medical advice. Individual needs may vary. Always consult with a
-            qualified healthcare professional before making changes to your
-            diet, nutrition, or lifestyle. We do not recommend using these
-            calculators as the sole basis for dietary decisions{" "}
-          </Text>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

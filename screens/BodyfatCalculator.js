@@ -101,82 +101,87 @@ const BodyfatCalculator = () => {
             <Text>i</Text>
           </TouchableOpacity>
         </View>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.QuestionContainer}>
+            <Text style={styles.QuestionCaption}>Age:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your Age"
+              keyboardType="numeric"
+              value={age}
+              onChangeText={setAge}
+            />
+            <GenderPicker selectedGender={gender} onSelect={setGender} />
+            <Text style={styles.QuestionCaption}>Weight (kg):</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your Weight (kg)"
+              keyboardType="numeric"
+              value={weight}
+              onChangeText={setWeight}
+            />
+            <Text style={styles.QuestionCaption}>Height (cm):</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your height (m)"
+              keyboardType="numeric"
+              value={height}
+              onChangeText={setHeight}
+            />
+            <Text style={styles.QuestionCaption}>
+              Waist Circumference (cm):
+            </Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your waist circumference (cm)"
+              keyboardType="numeric"
+              value={waist}
+              onChangeText={setWaist}
+            />
+            <Text style={styles.QuestionCaption}>Neck Circumference (cm):</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your neck circumference (cm)"
+              keyboardType="numeric"
+              value={neck}
+              onChangeText={setNeck}
+            />
 
-        <View style={styles.QuestionContainer}>
-          <Text style={styles.QuestionCaption}>Age:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your Age"
-            keyboardType="numeric"
-            value={age}
-            onChangeText={setAge}
-          />
-          <GenderPicker selectedGender={gender} onSelect={setGender} />
-          <Text style={styles.QuestionCaption}>Weight (kg):</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your Weight (kg)"
-            keyboardType="numeric"
-            value={weight}
-            onChangeText={setWeight}
-          />
-          <Text style={styles.QuestionCaption}>Height (cm):</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your height (m)"
-            keyboardType="numeric"
-            value={height}
-            onChangeText={setHeight}
-          />
-          <Text style={styles.QuestionCaption}>Waist Circumference (cm):</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your waist circumference (cm)"
-            keyboardType="numeric"
-            value={waist}
-            onChangeText={setWaist}
-          />
-          <Text style={styles.QuestionCaption}>Neck Circumference (cm):</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your neck circumference (cm)"
-            keyboardType="numeric"
-            value={neck}
-            onChangeText={setNeck}
-          />
+            {gender == "female" ? (
+              <View style={{ width: "100%" }}>
+                <Text style={styles.QuestionCaption}>
+                  Hip Circumference (cm):
+                </Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your hip circumference (cm)"
+                  keyboardType="numeric"
+                  value={hip}
+                  onChangeText={setHip}
+                />
+              </View>
+            ) : null}
 
-          {gender == "female" ? (
-            <View style={{ width: "100%" }}>
-              <Text style={styles.QuestionCaption}>
-                Hip Circumference (cm):
-              </Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter your hip circumference (cm)"
-                keyboardType="numeric"
-                value={hip}
-                onChangeText={setHip}
-              />
-            </View>
-          ) : null}
-
-          <Button
-            title="Calculate Body Fat"
-            onPress={handleCalculate}
-            style={styles.buttonSub}
-          />
-        </View>
-
-        {bodyFat && (
-          <View style={styles.resultContainer}>
-            <Text style={styles.resultTitle}>Body Fat Percentage</Text>
-            <Text style={styles.resultValue}>{bodyFat} %</Text>
+            <Button
+              title="Calculate Body Fat"
+              onPress={handleCalculate}
+              style={styles.buttonSub}
+            />
           </View>
-        )}
 
-        {/*  Navigation Bar */}
+          {bodyFat && (
+            <View style={styles.resultContainer}>
+              <Text style={styles.resultTitle}>Body Fat Percentage</Text>
+              <Text style={styles.resultValue}>{bodyFat} %</Text>
+            </View>
+          )}
 
-        {/* <View style={styles.navBarContainer}>
+          {/*  Navigation Bar */}
+
+          {/* <View style={styles.navBarContainer}>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -211,16 +216,17 @@ const BodyfatCalculator = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>*/}
-        <View style={styles.disclaimerContainer}>
-          <Text style={styles.finePrint}>
-            Disclaimer: The macronutrient and calorie estimates provided here
-            are for general informational purposes only and do not constitute
-            medical advice. Individual needs may vary. Always consult with a
-            qualified healthcare professional before making changes to your
-            diet, nutrition, or lifestyle. We do not recommend using these
-            calculators as the sole basis for dietary decisions{" "}
-          </Text>
-        </View>
+          <View style={styles.disclaimerContainer}>
+            <Text style={styles.finePrint}>
+              Disclaimer: The macronutrient and calorie estimates provided here
+              are for general informational purposes only and do not constitute
+              medical advice. Individual needs may vary. Always consult with a
+              qualified healthcare professional before making changes to your
+              diet, nutrition, or lifestyle. We do not recommend using these
+              calculators as the sole basis for dietary decisions{" "}
+            </Text>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
@@ -233,6 +239,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     width: "100%",
+  },
+  scrollContent: {
+    width: "100%",
+    alignItems: "center",
   },
   topHeader: {
     flexDirection: "row",
@@ -287,7 +297,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     //backgroundColor: "black",
     height: 60,
-
     position: "absolute",
     bottom: 10,
   },

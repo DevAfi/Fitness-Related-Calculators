@@ -12,6 +12,8 @@ import {
   TextInput,
   Button,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 import BodyfatCalculator from "./BodyfatCalculator";
@@ -23,73 +25,80 @@ const Tab = createBottomTabNavigator();
 const BMIcalculator = () => {
   const navigation = useNavigation();
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.titleText}>BMI Calculator</Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.titleText}>BMI Calculator</Text>
 
-      <View style={styles.QuestionContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your weight (kg)"
-          keyboardType="numeric"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your height (m)"
-          keyboardType="numeric"
-        />
-        <Button title="Calculate BMI" onPress={() => {}} />
-      </View>
-
-      {/*  Navigation Bar */}
-
-      <View style={styles.navBarContainer}>
         <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
         >
-          <TouchableOpacity
-            style={styles.navButton}
-            onPress={() => navigation.navigate("BMI")}
-          >
-            <Text style={styles.navButtonText}>BMI</Text>
-          </TouchableOpacity>
+          <View style={styles.QuestionContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your weight (kg)"
+              keyboardType="numeric"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your height (m)"
+              keyboardType="numeric"
+            />
+            <Button title="Calculate BMI" onPress={() => {}} />
+          </View>
 
-          <TouchableOpacity
-            style={styles.navButton}
-            onPress={() => navigation.navigate("BodyFat")}
-          >
-            <Text style={styles.navButtonText}>Body Fat</Text>
-          </TouchableOpacity>
+          {/*  Navigation Bar */}
 
-          <TouchableOpacity
-            style={styles.navButton}
-            onPress={() => navigation.navigate("Calories")}
-          >
-            <Text style={styles.navButtonText}>Calorie</Text>
-          </TouchableOpacity>
+          <View style={styles.navBarContainer}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.scrollContent}
+            >
+              <TouchableOpacity
+                style={styles.navButton}
+                onPress={() => navigation.navigate("BMI")}
+              >
+                <Text style={styles.navButtonText}>BMI</Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.navButton}
-            onPress={() => navigation.navigate("Macros")}
-          >
-            <Text style={styles.navButtonText}>Macros</Text>
-          </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.navButton}
+                onPress={() => navigation.navigate("BodyFat")}
+              >
+                <Text style={styles.navButtonText}>Body Fat</Text>
+              </TouchableOpacity>
 
-          {/* Add more buttons here if needed */}
+              <TouchableOpacity
+                style={styles.navButton}
+                onPress={() => navigation.navigate("Calories")}
+              >
+                <Text style={styles.navButtonText}>Calorie</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.navButton}
+                onPress={() => navigation.navigate("Macros")}
+              >
+                <Text style={styles.navButtonText}>Macros</Text>
+              </TouchableOpacity>
+
+              {/* Add more buttons here if needed */}
+            </ScrollView>
+          </View>
+          <View style={styles.disclaimerContainer}>
+            <Text style={styles.finePrint}>
+              Disclaimer: The macronutrient and calorie estimates provided here
+              are for general informational purposes only and do not constitute
+              medical advice. Individual needs may vary. Always consult with a
+              qualified healthcare professional before making changes to your
+              diet, nutrition, or lifestyle. We do not recommend using these
+              calculators as the sole basis for dietary decisions{" "}
+            </Text>
+          </View>
         </ScrollView>
-      </View>
-      <View style={styles.disclaimerContainer}>
-        <Text style={styles.finePrint}>
-          Disclaimer: The macronutrient and calorie estimates provided here are
-          for general informational purposes only and do not constitute medical
-          advice. Individual needs may vary. Always consult with a qualified
-          healthcare professional before making changes to your diet, nutrition,
-          or lifestyle. We do not recommend using these calculators as the sole
-          basis for dietary decisions{" "}
-        </Text>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

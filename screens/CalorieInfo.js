@@ -8,6 +8,8 @@ import {
   TextInput,
   Button,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useState } from "react";
 
@@ -20,87 +22,97 @@ const CalorieInfo = ({ route }) => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.topHeader}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.infoButton}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topHeader}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.infoButton}
+          >
+            <Text>{"<"}</Text>
+          </TouchableOpacity>
+          <Text style={styles.cardTitle}>Calorie Information</Text>
+        </View>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
         >
-          <Text>{"<"}</Text>
-        </TouchableOpacity>
-        <Text style={styles.cardTitle}>Calorie Information</Text>
-      </View>
-      <View style={styles.QuestionContainer}>
-        <GoalPicker selectedGoal={selectedGoal} onSelect={setSelectedGoal} />
-      </View>
+          <View style={styles.QuestionContainer}>
+            <GoalPicker
+              selectedGoal={selectedGoal}
+              onSelect={setSelectedGoal}
+            />
+          </View>
 
-      {selectedGoal == "weight_loss" ? (
-        <View style={styles.CardContainer}>
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Mild Weight Loss</Text>
-            <Text style={styles.cardValue}>
-              {Math.round(calories * 0.89)} kcal/day
-            </Text>
-            <Text style={styles.cardSubtitle}>-11% (0.25kg/week)</Text>
-          </View>
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Weight Loss</Text>
-            <Text style={styles.cardValue}>
-              {Math.round(calories * 0.79)} kcal/day
-            </Text>
-            <Text style={styles.cardSubtitle}>-21% (0.5kg/week)</Text>
-          </View>
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Extreme Weight Loss</Text>
-            <Text style={styles.cardValue}>
-              {Math.round(calories * 0.57)} kcal/day
-            </Text>
-            <Text style={styles.cardSubtitle}>-43% (1kg/week)</Text>
-          </View>
-        </View>
-      ) : (
-        <View style={styles.CardContainer}>
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Mild Weight Loss</Text>
-            <Text style={styles.cardValue}>
-              {Math.round(calories * 1.05)} kcal/day
-            </Text>
-            <Text style={styles.cardSubtitle}>+5% (0.25kg/week)</Text>
-          </View>
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Weight Loss</Text>
-            <Text style={styles.cardValue}>
-              {Math.round(calories * 1.21)} kcal/day
-            </Text>
-            <Text style={styles.cardSubtitle}>+21% (0.5kg/week)</Text>
-          </View>
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Extreme Weight Gain</Text>
-            <Text style={styles.cardValue}>
-              {Math.round(calories * 1.43)} kcal/day
-            </Text>
-            <Text style={styles.cardSubtitle}>+43% (1kg/week)</Text>
-          </View>
-        </View>
-      )}
-      {/*<View style={styles.card}>
+          {selectedGoal == "weight_loss" ? (
+            <View style={styles.CardContainer}>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Mild Weight Loss</Text>
+                <Text style={styles.cardValue}>
+                  {Math.round(calories * 0.89)} kcal/day
+                </Text>
+                <Text style={styles.cardSubtitle}>-11% (0.25kg/week)</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Weight Loss</Text>
+                <Text style={styles.cardValue}>
+                  {Math.round(calories * 0.79)} kcal/day
+                </Text>
+                <Text style={styles.cardSubtitle}>-21% (0.5kg/week)</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Extreme Weight Loss</Text>
+                <Text style={styles.cardValue}>
+                  {Math.round(calories * 0.57)} kcal/day
+                </Text>
+                <Text style={styles.cardSubtitle}>-43% (1kg/week)</Text>
+              </View>
+            </View>
+          ) : (
+            <View style={styles.CardContainer}>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Mild Weight Loss</Text>
+                <Text style={styles.cardValue}>
+                  {Math.round(calories * 1.05)} kcal/day
+                </Text>
+                <Text style={styles.cardSubtitle}>+5% (0.25kg/week)</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Weight Loss</Text>
+                <Text style={styles.cardValue}>
+                  {Math.round(calories * 1.21)} kcal/day
+                </Text>
+                <Text style={styles.cardSubtitle}>+21% (0.5kg/week)</Text>
+              </View>
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Extreme Weight Gain</Text>
+                <Text style={styles.cardValue}>
+                  {Math.round(calories * 1.43)} kcal/day
+                </Text>
+                <Text style={styles.cardSubtitle}>+43% (1kg/week)</Text>
+              </View>
+            </View>
+          )}
+          {/*<View style={styles.card}>
         <Text style={styles.cardTitle}>Weight Gain</Text>
         <Text style={styles.cardValue}>
           {Math.round(calories * 1.15)} kcal/day
         </Text>
         <Text style={styles.cardSubtitle}>+15% (0.5kg/week)</Text>
       </View>*/}
-      <View style={styles.disclaimerContainer}>
-        <Text style={styles.finePrint}>
-          Disclaimer: The macronutrient and calorie estimates provided here are
-          for general informational purposes only and do not constitute medical
-          advice. Individual needs may vary. Always consult with a qualified
-          healthcare professional before making changes to your diet, nutrition,
-          or lifestyle. We do not recommend using these calculators as the sole
-          basis for dietary decisions{" "}
-        </Text>
-      </View>
-    </SafeAreaView>
+          <View style={styles.disclaimerContainer}>
+            <Text style={styles.finePrint}>
+              Disclaimer: The macronutrient and calorie estimates provided here
+              are for general informational purposes only and do not constitute
+              medical advice. Individual needs may vary. Always consult with a
+              qualified healthcare professional before making changes to your
+              diet, nutrition, or lifestyle. We do not recommend using these
+              calculators as the sole basis for dietary decisions{" "}
+            </Text>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -109,6 +121,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#d0d8c3",
+    width: "100%",
+    alignItems: "center",
+  },
+  scrollContent: {
     width: "100%",
     alignItems: "center",
   },
