@@ -42,12 +42,12 @@ const ResultMacro = ({ route }) => {
 
   const adjustedCalories = getAdjustedCalories();
 
-  console.log("Before calculateMacros:", {
+  /*  console.log("Before calculateMacros:", {
     adjustedCalories,
     weight,
     typeofAdjustedCalories: typeof adjustedCalories,
     typeofWeight: typeof weight,
-  });
+  });  */
 
   const { protein, carbs, fats } = calculateMacros(adjustedCalories, weight);
 
