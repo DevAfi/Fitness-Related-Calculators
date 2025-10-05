@@ -1,31 +1,143 @@
-# Fitness-Related-Calculators
+# 💪 Fitness Calculators
 
-## Overview
+A comprehensive React Native app featuring four essential fitness calculators to help you track your health and fitness goals.
 
-this project acted as my first solo React Native app and consists of 4 main features:
+![React Native](https://img.shields.io/badge/React_Native-0.79.5-blue.svg)
+![Expo](https://img.shields.io/badge/Expo-~53.0.17-black.svg)
+![License](https://img.shields.io/badge/License-0BSD-green.svg)
 
-<ul>
-  <li>Calorie calculator</li>
-  <li>Macronutrient calculator</li>
-  <li>Body fat calculator</li>
-  <li>BMI calculator</li>
-</ul>
-Below I will expand on how each one works
+## 🚀 Features
 
-### Calorie calculator
+### 📊 BMI Calculator
+Calculate your Body Mass Index using your age, gender, weight, and height. Get instant feedback on your body composition.
 
-This calculator takes the user's age, gender, height and weight to calculate their Basal Metabolic Rate (BMR), then gives the user options to either gain or lose weight at certain rates by increasing or decreasing their caloric intake respectively. In total it allows the user to enter their:
+### 🔥 Calorie Calculator
+Determine your daily caloric needs using the **Mifflin-St Jeor equation** for maximum accuracy. Includes:
+- Basal Metabolic Rate (BMR) calculation
+- Activity level adjustments
+- Weight loss/gain recommendations (±15% caloric adjustment)
 
-<ul>
-  <li>Age</li>
-  <li>Gender</li>
-  <li>Weight</li>
-  <li>Height</li>
-  <li>Activity level</li>
-</ul>
-Then it uses the [Mifflin-St Jeor equation](https://reference.medscape.com/calculator/846/mifflin-st-jeor-equation) to calculate their updated caloric maintainance for maximum accuracy.
+### 🥗 Macro Calculator
+Get personalized macronutrient breakdowns based on your caloric needs:
+- **50% Carbohydrates**
+- **31% Protein** 
+- **19% Fats**
 
-### Macronutrient calculator
+### 📏 Body Fat Calculator
+Estimate your body fat percentage using circumference measurements:
+- Waist, neck, and hip measurements
+- Gender-specific calculations
+- Navy method formula
 
-This calculator first acts like a calorie calculator which takes the user's age, gender, height, weight and activity levels to calculate calories, then upon the caloric maintainance being calculated, allows the user to both their goal as well as the rate of said goal. After this the user is presented with their **Calories, Protein, Carbohydrate and Fat** goals, respective to their goals.
-The macronutrients are split into a 50/31/19 ratio of Carbs, Protein and fats, respectively
+## 🛠️ Tech Stack
+
+- **React Native** 0.79.5
+- **Expo** ~53.0.17
+- **React Navigation** for seamless navigation
+- **React Native Picker** for intuitive selections
+
+## 📱 Screenshots
+
+*Add screenshots of your app here to showcase the UI*
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v14 or higher)
+- Expo CLI
+- iOS Simulator or Android Emulator (or physical device with Expo Go)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/Fitness-Related-Calculators.git
+   cd Fitness-Related-Calculators
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+4. **Run on your preferred platform**
+   ```bash
+   # iOS
+   npm run ios
+   
+   # Android
+   npm run android
+   
+   # Web
+   npm run web
+   ```
+
+## 📁 Project Structure
+
+```
+Fitness-Related-Calculators/
+├── App.js                 # Main app component with navigation
+├── screens/              # Calculator screens
+│   ├── BMIcalculator.js
+│   ├── BodyfatCalculator.js
+│   ├── CalorieCalculator.js
+│   ├── MacroCalculator.js
+│   └── ...
+├── utils/                # Utility components and functions
+│   ├── Calculations.js   # Core calculation functions
+│   ├── GenderPicker.js
+│   ├── ActivityLevelPicker.js
+│   └── ...
+└── assets/               # App icons and images
+```
+
+## 🧮 Calculation Methods
+
+### BMI Calculation
+```
+BMI = weight(kg) / height(m)²
+```
+
+### Calorie Calculation (Mifflin-St Jeor)
+**Men:** `BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age + 5`
+**Women:** `BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age - 161`
+
+### Body Fat Calculation
+Uses the Navy method with gender-specific formulas for waist, neck, and hip measurements.
+
+## 🎨 Current Design
+
+The app features a clean, nature-inspired color scheme:
+- **Primary Green:** `#014421` (Dark forest green)
+- **Background:** `#d0d8c3` (Light sage green)
+- **Accent:** White for contrast and readability
+
+## ⚠️ Disclaimer
+
+The calculations provided by this app are for general informational purposes only and do not constitute medical advice. Individual needs may vary significantly. Always consult with a qualified healthcare professional before making changes to your diet, nutrition, or lifestyle.
+
+## 🤝 Contributing
+
+This was my first React Native project! While I'm not actively seeking contributions, I'm always open to learning and improving. Feel free to:
+- Report bugs
+- Suggest new features
+- Share your experience using the app
+
+## 📄 License
+
+This project is licensed under the 0BSD License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built with ❤️ using React Native and Expo
+- Special thanks to the React Native community for excellent documentation
+- Fitness calculation formulas based on established medical research
+
+---
+
+*Made with passion for fitness and technology* 🏃‍♂️💻
