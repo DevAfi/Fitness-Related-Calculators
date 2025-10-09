@@ -19,7 +19,7 @@ const ActivityLevelPicker = ({ selectedValue, onValueChange }) => {
           selectedValue={selectedValue}
           onValueChange={onValueChange}
           style={styles.picker}
-          dropdownIconColor="#014421"
+          dropdownIconColor="#6b7280"
           mode="dropdown"
           itemStyle={styles.pickerItem}
         >
@@ -44,15 +44,23 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginBottom: 8,
-    color: "#014421",
-    fontWeight: "bold",
+    color: "#374151",
+    fontWeight: "600",
   },
   pickerWrapper: {
     borderWidth: 1,
-    borderColor: "#014421",
-    borderRadius: 8,
+    borderColor: "#d1d5db",
+    borderRadius: 12,
     overflow: "hidden",
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#ffffff",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
   picker: {
     width: "100%",
@@ -60,7 +68,7 @@ const styles = StyleSheet.create({
   },
   pickerItem: {
     fontSize: 16,
-    color: "#014421",
+    color: "#374151",
     height: 120,
   },
 });
